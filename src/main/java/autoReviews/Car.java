@@ -19,7 +19,7 @@ public class Car {
 	private String name;
 
 	@OneToMany
-	private Collection<Model> models;
+	private Collection<CarModel> carModels;
 	
 	public long getId() {
 		return id;
@@ -30,9 +30,9 @@ public class Car {
 	}
 	
 	
-	public Car(String name, Model...models) {
+	public Car(String name, CarModel...carModels) {
 		this.name = name;
-		this.models = new HashSet<>(Arrays.asList(models));
+		this.carModels = new HashSet<>(Arrays.asList(carModels));
 	}
 	
 	
@@ -40,8 +40,8 @@ public class Car {
 		
 	}
 
-	public Collection<Model> getModels() {
-		return models;
+	public Collection<CarModel> getModels() {
+		return carModels;
 	}
 
 	@Override

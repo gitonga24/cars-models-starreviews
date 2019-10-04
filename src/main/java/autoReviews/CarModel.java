@@ -12,21 +12,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Model {
+public class CarModel {
 
 	@Id
 	@GeneratedValue
 	private long id;
 	
-	private String modelName;
+	private String carModelName;
 	private String size;
 	private String description;
 
 	//OneToMany??
-	@ManyToMany(mappedBy = "models")
+	@ManyToMany(mappedBy = "carModels")
 	private Collection<Car> cars;
 
-	@OneToMany(mappedBy = "model")
+	@OneToMany(mappedBy = "carModel")
 	private Collection<Review> reviews;
 	
 	
@@ -36,7 +36,7 @@ public class Model {
 
 	
 	public String getModelName() {
-		return modelName;
+		return carModelName;
 	}
 	
 	
@@ -59,14 +59,14 @@ public class Model {
 		return reviews;
 	}
 	
-	public Model(String modelName, String size, String description, Review...reviews) {
-		this.modelName = modelName;
+	public CarModel(String modelName, String size, String description, Review...reviews) {
+		this.carModelName = modelName;
 		this.size = size;
 		this.description = description;		
 		this.reviews = new HashSet<>(Arrays.asList(reviews));
 	}
 	
-	public Model() {
+	public CarModel() {
 		
 	}
 	
@@ -87,7 +87,7 @@ public class Model {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Model other = (Model) obj;
+		CarModel other = (CarModel) obj;
 		if (id != other.id)
 			return false;
 		return true;

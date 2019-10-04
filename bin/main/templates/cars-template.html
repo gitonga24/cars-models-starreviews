@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title> A List of Review Cars</title>
+	 <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+
+	<header>
+		<h1> Cars available for Review</h1>
+	
+	</header>
+
+		<div th:each="car: ${reviewsModel}">
+			<h2>
+				<a th:href="@{/show-car-models(id=${carModel.id})}" th:text="${car.name}"></a>
+			</h2>
+		
+		</div>
+      
+  </body>   
+	<footer>
+		<small>&copy Auto Consumer Review LLC</small>
+	</footer>
+
+</html>
+
+
+
+
+

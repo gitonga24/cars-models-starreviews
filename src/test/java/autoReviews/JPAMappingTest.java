@@ -25,7 +25,7 @@ public class JPAMappingTest {
 	private CarRepository carRepo;
 	
 	@Resource
-	private ModelRepository modelRepo;
+	private CarModelRepository carModelRepo;
 	
 	@Resource
 	private ReviewRepository reviewRepo;
@@ -56,22 +56,22 @@ public class JPAMappingTest {
 	
 	@Test
 	public void shouldSaveAndLoadModel() {
-		Model model = modelRepo.save(new Model("Accord", "size", "description"));
+		CarModel model = carModelRepo.save(new CarModel("Accord", "size", "description"));
 		long modelId = model.getId();
 		
 		entityManager.flush();
 		entityManager.clear();
 		
-		Optional<Model> result = modelRepo.findById(modelId);
+		Optional<CarModel> result = carModelRepo.findById(modelId);
 		result.get();		
 		assertThat(model.getModelName(), is("Accord"));		
 	} 
 	
 	@Test
 	public void shouldEstablishRelationshipBetweenCarAndModel() {
-		Model accord = modelRepo.save(new Model("Accord", "Accord size", "Accord description"));
-		Model civic = modelRepo.save(new Model("Civic", "civic size", "civic description"));
-		Model pilot = modelRepo.save(new Model("pilot", "pilot size", "civic description"));
+		CarModel accord = carModelRepo.save(new CarModel("Accord", "Accord size", "Accord description"));
+		CarModel civic = carModelRepo.save(new CarModel("Civic", "civic size", "civic description"));
+		CarModel pilot = carModelRepo.save(new CarModel("pilot", "pilot size", "civic description"));
 		
 		Car nissan = carRepo.save(new Car("Nissan", accord, civic, pilot));
 		long carId = nissan.getId();
@@ -91,7 +91,7 @@ public class JPAMappingTest {
 		Review accordTwoStar = reviewRepo.save(new Review ("Two Star", "400"));
 		Review accordThreeStar = reviewRepo.save(new Review("Three Star", "750"));
 		
-		Model accord = modelRepo.save(new Model ("Accord", "Size", "Description", accordOneStar, accordTwoStar, accordThreeStar));
+		CarModel accord = carModelRepo.save(new CarModel ("Accord", "Size", "Description", accordOneStar, accordTwoStar, accordThreeStar));
 		long modelId = accord.getId();
 		
 		entityManager.flush();

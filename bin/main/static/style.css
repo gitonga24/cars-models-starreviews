@@ -1,0 +1,32 @@
+
+header {
+   color: blue;
+}
+
+
+header,
+main
+ {
+    margin: 0 auto;
+    max-width: 750px;
+}
+
+nav {
+    margin-left: 0.5em;
+    position: relative;
+    width: 25%;
+    background: #7adbff;
+    display: flex;
+    flex-flow: column;
+    justify-content: left;
+}
+
+
+footer {
+  color: blue;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;   
+        
+}

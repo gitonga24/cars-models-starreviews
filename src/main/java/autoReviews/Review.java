@@ -19,12 +19,10 @@ public class Review {
 	private long id;
 	
 	
-//	@ManyToMany(mappedBy = "reviews")
-//	private Collection<Model> models;
-	
+
 //	This passes the tests!
 	@ManyToOne
-	private Model model;
+	private CarModel carModel;
 	
 	
 	public long getId() {
@@ -40,9 +38,6 @@ public class Review {
 		return reviewCount;
 	}
 	
-//	public Collection<Model> getModels(){
-//		return models;
-//	}
 	
 	
 	public Review(String starRating, String reviewCount) {

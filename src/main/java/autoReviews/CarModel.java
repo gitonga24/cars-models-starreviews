@@ -7,6 +7,7 @@ import java.util.HashSet;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -16,10 +17,13 @@ public class CarModel {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	
-	private String carModelName;
+
+	private String carModelName;	
 	private String size;
+	
+	@Lob
 	private String description;
 
 	//OneToMany??
@@ -27,10 +31,10 @@ public class CarModel {
 	private Collection<Car> cars;
 
 	@OneToMany(mappedBy = "carModel")
-	private Collection<Review> reviews;
+	private Collection<StarRatings> reviews;
 	
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -55,11 +59,12 @@ public class CarModel {
 		return description;
 	}
 	
-	public Collection<Review> getReviews() {
+	public Collection<StarRatings> getReviews() {
 		return reviews;
 	}
 	
-	public CarModel(String modelName, String size, String description, Review...reviews) {
+	public CarModel(Long id, String modelName, String size, String description, StarRatings...reviews) {
+		this.id = id;
 		this.carModelName = modelName;
 		this.size = size;
 		this.description = description;		

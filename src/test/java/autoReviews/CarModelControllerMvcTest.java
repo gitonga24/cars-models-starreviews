@@ -32,7 +32,7 @@ public class CarModelControllerMvcTest {
 	private CarModelRepository carModelRepo;
 	
 	@MockBean
-	private ReviewRepository reviewRepo;
+	private StarRatingsRepository starRatingsRepo;
 	
 	@MockBean
 	private CarRepository carRepo;
@@ -43,37 +43,55 @@ public class CarModelControllerMvcTest {
 	@Mock
 	private CarModel civic;
 	
+	@Mock 
+	private StarRatings fiveStar;
+	
+	@Mock 
+	private StarRatings fourStar;
+	
+	@Mock 
+	private StarRatings threeStar;
+	
 	@Test
 	public void shouldRouteToSingleCarModelView() throws Exception {
 		long arbitraryCarModelId = 1;
 		when(carModelRepo.findById(arbitraryCarModelId)).thenReturn(Optional.of(accord));
-		mvc.perform(get("/carModel?id=1")).andExpect(view().name(is("carModel")));		
+		mvc.perform(get("/show-one-car-model?id=1")).andExpect(view().name(is("one-car-model-template")));		
 	}
 	
 	@Test
-	public void shouldReturnOkForSingleReview() throws Exception {
+	public void shouldReturnOkForSingleModelReview() throws Exception {
 		long arbitraryCarModelId = 1;
 		when(carModelRepo.findById(arbitraryCarModelId)).thenReturn(Optional.of(accord));
-		mvc.perform(get("/carModel?id=1")).andExpect(status().isOk());
+		mvc.perform(get("/show-one-car-model?id=1")).andExpect(status().isOk());
 	}
 	
 	@Test
 	public void shouldAddSingleCarModelInTheModel() throws Exception {
 		when(carModelRepo.findById(1L)).thenReturn(Optional.of(accord));	
-		mvc.perform(get("/carModel?id=1")).andExpect(model().attribute("carModel", is(accord)));
+		mvc.perform(get("/show-one-car-model?id=1")).
+		andExpect(model().attribute("carModel", is(accord)));
+	}
+	
+
+	 
+	@Test
+	public void shouldAddAllCarModelsInTheModel() throws Exception {
+		Collection <CarModel> allCarModels = Arrays.asList(accord, civic);
+		when(carModelRepo.findAll()).thenReturn(allCarModels);
+		mvc.perform(get("/show-carModels-model"))
+		.andExpect(model().attribute("carModels", is(allCarModels)));
 	}
 	
 	@Test
-	public void shouldRouteToAllCarModelsTemplate() throws Exception {
-		mvc.perform(get("/show-carModels")).andExpect(view().name(is("carModels")));	
-		
-	}
-	 
-	@Test
-	public void shouldPutAllCarModelsInTheModel() throws Exception {
-		Collection <CarModel> allCarModels = Arrays.asList(accord, civic);
-		when(carModelRepo.findAll()).thenReturn(allCarModels);
-		mvc.perform(get("/show-carModels")).andExpect(model().attribute("carModels", is(allCarModels)));
-	}
+	public void shouldAddAllStarReviewsInTheModel() throws Exception {
+		Collection <StarRatings> allStarRatings = Arrays.asList(fiveStar, fourStar, threeStar);
+		when(starRatingsRepo.findAll()).thenReturn(allStarRatings);
+		mvc.perform(get("/show-starRatings-model"))
+		.andExpect(model().attribute("starRatingsModel", is(allStarRatings)));
+		}
+	
+	
+	
 	
 }

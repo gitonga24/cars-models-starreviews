@@ -9,14 +9,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Review {
+public class StarRatings {
 
 	private String starRating;
 	private String reviewCount;
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	
 	
 
@@ -25,7 +25,7 @@ public class Review {
 	private CarModel carModel;
 	
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	
@@ -40,12 +40,13 @@ public class Review {
 	
 	
 	
-	public Review(String starRating, String reviewCount) {
+	public StarRatings(Long id, String starRating, String reviewCount) {
+		this.id = id;
 		this.starRating = starRating;
 		this.reviewCount = reviewCount;
 	}
 
-	public Review() {
+	public StarRatings() {
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class Review {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Review other = (Review) obj;
+		StarRatings other = (StarRatings) obj;
 		if (id != other.id)
 			return false;
 		return true;

@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ReviewController {
 
 	@Resource
-	ReviewRepository reviewRepo;
+	private StarRatingsRepository starRatingsRepo;
 	
 	@Resource 
-	CarModelRepository carModelRepo;
+	private CarModelRepository carModelRepo;
 	
 	@Resource
-	CarRepository carRepo;
-	
-	
+	private CarRepository carRepo;
 	
 	
 	
@@ -32,44 +30,42 @@ public class ReviewController {
 		return "cars-template";	
 	}
 	
-	@RequestMapping("/carModel")
+	@GetMapping("/show-one-car-model")	
 	public String findOneCarModel(@RequestParam(value ="id")long id, Model model) throws ReviewNotFoundException {
 		Optional<CarModel> accord = carModelRepo.findById(id);
 		
 		if(accord.isPresent()) {
 			model.addAttribute("carModel", accord.get());
-			return "carModel";
+			return "one-car-model-template";
 		}
-		throw new ReviewNotFoundException();	
-		
+		throw new ReviewNotFoundException();			
 	}
 	
-	@RequestMapping("/show-carModels")
+	
+	@RequestMapping("/show-carModels-model")
 	public String findAllCarModels(Model model) {
 		model.addAttribute("carModels", carModelRepo.findAll());
-		return("carModels");		
+		return("car-models-template");		
 	}
-	
-	
-	
-	@RequestMapping("/review")
-	public String findOneReview(@RequestParam(value ="id")long id, Model model) throws ReviewNotFoundException {
-		Optional<Review> review = reviewRepo.findById(id);
 		
+	
+	@GetMapping("/show-single-starRating-model")
+	public String findOneStarRating(@RequestParam(value ="id")long id, Model model) throws ReviewNotFoundException {
+		Optional<StarRatings> review = starRatingsRepo.findById(id);		
 		if(review.isPresent()) {
-			model.addAttribute("reviews", review.get());
-			return "review";
+			model.addAttribute("starRatingsModel", review.get());
+			return "starRating-template";
 		}
 		throw new ReviewNotFoundException();
-		
-		
 	}
 
-	@RequestMapping("/show-reviews")
-	public String findAllReviews(Model model) {
-		model.addAttribute("reviews", reviewRepo.findAll());
-		return("reviews");
-		
+
+	
+	
+	@RequestMapping("/show-starRatings-model")
+	public String findAllStarRatingsReviews(Model model) {
+		model.addAttribute("starRatingsModel", starRatingsRepo.findAll());
+		return("starRatings-template");	
 	}
 
 	

@@ -10,19 +10,22 @@
 		<h1> Cars available for Review</h1>
 	
 	</header>
-
-		<div th:each="car: ${reviewsModel}">
-			<h2>
-				<a th:href="@{/show-car-models(id=${carModel.id})}" th:text="${car.name}"></a>
-			</h2>
+			
+			
+			
+		<div th:each="car: ${carModel}">
+			<h4>
+				<a th:href="@{/carModel(id=${carModel.id})}" th:text="${carModel.carModelName}"></a>
+			</h4>
 		
 		</div>
-      
-  </body>   
-	<footer>
-		<small>&copy Auto Consumer Review LLC</small>
-	</footer>
+		
+     
 
+	<footer>
+		<small>&copy Auto Consumer Review </small>
+	</footer>
+  </body>   
 </html>
 
 

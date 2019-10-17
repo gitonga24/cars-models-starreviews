@@ -20,23 +20,23 @@ public class InventoryPopulator implements CommandLineRunner {
 	
 	
 	
-	public void run(String... args) throws Exception{			
-		StarRatings accordFiveStar = new StarRatings (1L, "Five Star Rating", "750 votes");
-		StarRatings accordFourStar = new StarRatings (2L, "Four Star Rating", "600 Votes");
-		StarRatings civicFiveStar = new StarRatings (3L, "Five Star Rating", "800 votes");
-		StarRatings civicFourStar = new StarRatings (4L, "Four Star Rating", "650 votes");
+	public void run(String... args) throws Exception{
+		CarModel accord = new CarModel (1L, "Accord", "35L x 40L", "One of the best newer models");
+		CarModel civic = new CarModel (2L, "Civic", "30L x 45L", "Another One of the best selling Honda models");
+
+		accord = carModelRepo.save(accord);
+		civic = carModelRepo.save(civic);
+
+		StarRatings accordFiveStar = new StarRatings ("Five Star Rating", "750 votes", accord);
+		StarRatings accordFourStar = new StarRatings ("Four Star Rating", "600 Votes", accord);
+		StarRatings civicFiveStar = new StarRatings ("Five Star Rating", "800 votes", civic);
+		StarRatings civicFourStar = new StarRatings ("Four Star Rating", "650 votes", civic);
 
 		accordFiveStar = reviewRepo.save(accordFiveStar);
 		accordFourStar = reviewRepo.save(accordFourStar);
 		civicFiveStar = reviewRepo.save(civicFiveStar);
+
 		civicFourStar = reviewRepo.save(civicFourStar);
-		
-		CarModel accord = new CarModel (1L, "Accord", "35L x 40L", "One of the best newer models", accordFiveStar, accordFourStar);
-		CarModel civic = new CarModel (2L, "Civic", "30L x 45L", "Another One of the best selling Honda models", civicFourStar, civicFiveStar);
-			
-		accord = carModelRepo.save(accord);
-		civic = carModelRepo.save(civic);
-		
 		Car honda = new Car("Honda", accord, civic);
 		honda = carRepo.save(honda);			
 			

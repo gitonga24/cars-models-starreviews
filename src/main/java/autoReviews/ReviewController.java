@@ -26,17 +26,17 @@ public class ReviewController {
 	
 	@GetMapping("/show-cars")
 	public String findAllCars(Model model) {
-		model.addAttribute("reviewsModel", carRepo.findAll());
+		model.addAttribute("cars", carRepo.findAll());
 		return "cars-template";	
 	}
 	
 	@GetMapping("/show-one-car-model")	
 	public String findOneCarModel(@RequestParam(value ="id")long id, Model model) throws ReviewNotFoundException {
-		Optional<CarModel> accord = carModelRepo.findById(id);
+		Optional<CarModel> retrievedCarModel = carModelRepo.findById(id);
 		
-		if(accord.isPresent()) {
-			model.addAttribute("carModel", accord.get());
-			return "one-car-model-template";
+		if(retrievedCarModel.isPresent()) {
+			model.addAttribute("carModel", retrievedCarModel.get());
+			return "single-car-view";
 		}
 		throw new ReviewNotFoundException();			
 	}
@@ -45,7 +45,7 @@ public class ReviewController {
 	@RequestMapping("/show-carModels-model")
 	public String findAllCarModels(Model model) {
 		model.addAttribute("carModels", carModelRepo.findAll());
-		return("car-models-template");		
+		return("single-car-view");
 	}
 		
 	
@@ -66,6 +66,13 @@ public class ReviewController {
 	public String findAllStarRatingsReviews(Model model) {
 		model.addAttribute("starRatingsModel", starRatingsRepo.findAll());
 		return("starRatings-template");	
+	}
+
+	@RequestMapping("/show-car-manufacturer")
+	public String findCarManufacturer(@RequestParam(value="id")Long id, Model model){
+		Car retrievedCar = carRepo.findById(id).get();
+		model.addAttribute("car", retrievedCar);
+		return "single-car-view";
 	}
 
 	

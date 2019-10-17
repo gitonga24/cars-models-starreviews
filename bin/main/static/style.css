@@ -30,3 +30,31 @@ footer {
   height: 2.5rem;   
         
 }
+
+
+.grid-container * { 
+ border: 1px solid blue;
+ position: relative;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: ". . . ." ". . . ." ". . . .";
+}
+
+
+.container {
+  min-height: 400px;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.item {
+  flex: 0 0 auto;
+  margin: 5px;
+}
+
+

@@ -40,10 +40,10 @@ public class StarRatings {
 	
 	
 	
-	public StarRatings(Long id, String starRating, String reviewCount) {
-		this.id = id;
+	public StarRatings(String starRating, String reviewCount, CarModel carModel) {
 		this.starRating = starRating;
 		this.reviewCount = reviewCount;
+		this.carModel = carModel;
 	}
 
 	public StarRatings() {

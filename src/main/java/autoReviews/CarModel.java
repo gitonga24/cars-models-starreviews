@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 public class CarModel {
 
 	@Id
-	@GeneratedValue
+//	@GeneratedValue
 	private Long id;
 	
 
@@ -39,7 +39,7 @@ public class CarModel {
 	}
 
 	
-	public String getModelName() {
+	public String getCarModelName() {
 		return carModelName;
 	}
 	
@@ -63,17 +63,18 @@ public class CarModel {
 		return reviews;
 	}
 	
-	public CarModel(Long id, String modelName, String size, String description, StarRatings...reviews) {
+	public CarModel(Long id, String modelName, String size, String description) {
 		this.id = id;
 		this.carModelName = modelName;
 		this.size = size;
 		this.description = description;		
-		this.reviews = new HashSet<>(Arrays.asList(reviews));
+		
 	}
 	
 	public CarModel() {
 		
 	}
+
 	
 	@Override
 	public int hashCode() {

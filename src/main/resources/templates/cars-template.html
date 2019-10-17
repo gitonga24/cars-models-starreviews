@@ -6,22 +6,24 @@
 </head>
 <body>
 
+
 	<header>
 		<h1> Cars available for Review</h1>
 	
 	</header>
-			
-			
-			
-		<div th:each="car: ${carModel}">
+					
+		<div th:each="car: ${cars}">
 			<h4>
-				<a th:href="@{/carModel(id=${carModel.id})}" th:text="${carModel.carModelName}"></a>
+				<a th:href="@{/show-car-manufacturer(id=${car.id})}" th:text="${car.name}"></a>
 			</h4>
 		
 		</div>
 		
-     
-
+		
+		<div class="grid-container"> <a href="/show-cars">Home Page</a>  </div>
+		
+	
+				
 	<footer>
 		<small>&copy Auto Consumer Review </small>
 	</footer>
